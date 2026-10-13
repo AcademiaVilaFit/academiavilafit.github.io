@@ -1,0 +1,7 @@
+# Material de trabalho: fica só no Mac, não vai para o site.
+.impeccable/
+conteudo/
+assets/fotos/
+PRODUCT.md
+DESIGN.md
+.DS_Store

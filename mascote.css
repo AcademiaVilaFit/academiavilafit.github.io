@@ -1,0 +1,187 @@
+/* Mascote: fica no canto inferior direito, acima de tudo menos do link de pular. */
+
+.mascote {
+  --m-tamanho: 4.75rem;
+  --m-olhar-x: 0px;
+  --m-olhar-y: 0px;
+  position: fixed;
+  right: 0.75rem;
+  bottom: 1rem;
+  z-index: 24;
+  display: grid;
+  justify-items: end;
+  gap: 0.6rem;
+  pointer-events: none;
+  animation: m-chegar 500ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
+}
+
+.mascote > * { pointer-events: auto; }
+
+/* Corpo */
+
+.mascote-corpo {
+  display: block;
+  width: var(--m-tamanho);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.mascote-corpo:active { transform: scale(0.94); }
+.mascote-corpo:focus-visible,
+.mascote-fechar:focus-visible {
+  outline: 3px solid var(--m-contorno);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--m-corpo);
+  border-radius: 0.5rem;
+}
+
+.mascote-corpo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 4px 5px oklch(0.19 0.012 100 / 0.3));
+}
+
+.m-figura { transform-box: view-box; transform-origin: 60px 90px; animation: m-respirar 3.6s ease-in-out infinite; }
+
+.m-anilha { fill: var(--m-anilha); stroke: var(--m-contorno); stroke-width: 4; }
+.m-corpo { fill: var(--m-corpo); stroke: var(--m-contorno); stroke-width: 4; }
+.m-faixa,
+.m-faixa-ponta { fill: none; stroke: var(--m-contorno); stroke-width: 5; stroke-linecap: round; }
+.m-faixa-ponta { stroke-width: 3.5; }
+.m-bochecha { fill: var(--m-bochecha); }
+.m-olho { transform-box: fill-box; transform-origin: center; animation: m-piscar 4.8s infinite; }
+.m-olho-fundo { fill: var(--m-contorno); }
+.m-pupila { transform: translate(var(--m-olhar-x), var(--m-olhar-y)); transition: transform 250ms cubic-bezier(0.23, 1, 0.32, 1); }
+.m-pupila-cor { fill: var(--m-contorno); }
+.m-brilho { fill: var(--m-corpo); }
+.m-boca { fill: none; stroke: var(--m-contorno); stroke-width: 3; stroke-linecap: round; transition: d 200ms ease; }
+.m-braco { transform-box: view-box; transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }
+.m-braco-esq { transform-origin: 39px 66px; }
+.m-braco-dir { transform-origin: 81px 66px; }
+.m-braco-linha { fill: none; stroke: var(--m-contorno); stroke-width: 4; stroke-linecap: round; }
+.m-mao { fill: var(--m-corpo); stroke: var(--m-contorno); stroke-width: 3; }
+
+/* Reações */
+
+.mascote.acenando .m-braco-dir { animation: m-acenar 600ms ease-in-out 4 alternate; }
+.mascote.rindo .m-figura { animation: m-rir 280ms ease-in-out 5 alternate; }
+.mascote.rindo .m-boca,
+.mascote.empolgado .m-boca { d: path("M53 59 Q60 70 67 59 Z"); fill: var(--m-contorno); }
+.mascote.muque .m-braco-esq { transform: rotate(140deg); }
+.mascote.muque .m-braco-dir { transform: rotate(-140deg); }
+.mascote.pulando .m-figura { animation: m-pular 700ms cubic-bezier(0.23, 1, 0.32, 1); }
+.mascote.empolgado .m-figura { animation: m-rir 240ms ease-in-out infinite alternate; }
+.mascote.empolgado .m-braco-esq { transform: rotate(120deg); }
+.mascote.empolgado .m-braco-dir { transform: rotate(-120deg); }
+
+/* Balão */
+
+.mascote-balao {
+  position: relative;
+  max-width: min(15rem, calc(100vw - 1.5rem));
+  margin: 0;
+  padding: 0.7rem 0.9rem;
+  border: 2px solid var(--m-contorno);
+  border-radius: 0.9rem 0.9rem 0.25rem 0.9rem;
+  background: var(--m-balao-fundo);
+  color: var(--m-balao-texto);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+  box-shadow: 0 6px 16px oklch(0.19 0.012 100 / 0.25);
+  opacity: 0;
+  transform: translateY(0.4rem) scale(0.96);
+  transform-origin: 100% 100%;
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 250ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.mascote.falando .mascote-balao { opacity: 1; transform: none; }
+.mascote-balao:empty { display: none; }
+
+/* Minimizar */
+
+.mascote-fechar {
+  position: absolute;
+  right: -0.25rem;
+  bottom: calc(var(--m-tamanho) * 0.62);
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 2px solid var(--m-contorno);
+  border-radius: 50%;
+  background: var(--m-corpo);
+  color: var(--m-contorno);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 200ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.mascote-fechar::before { content: ""; position: absolute; inset: -0.5rem; }
+.mascote-fechar svg { width: 0.9rem; height: 0.9rem; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; }
+.mascote-fechar:active { transform: scale(0.9); }
+.mascote:focus-within .mascote-fechar,
+.mascote-fechar:focus-visible { opacity: 1; }
+
+@media (hover: hover) and (pointer: fine) {
+  .mascote:hover .mascote-fechar { opacity: 1; }
+  .mascote-corpo:hover { transform: translateY(-2px); }
+  .mascote-corpo:hover:active { transform: scale(0.94); }
+}
+@media (hover: none) {
+  .mascote-fechar { opacity: 1; }
+}
+
+.mascote.minimizado { --m-tamanho: 3.3rem; }
+.mascote.minimizado .mascote-fechar,
+.mascote.minimizado .mascote-balao { display: none; }
+.mascote.minimizado .m-figura,
+.mascote.minimizado .m-olho { animation: none; }
+.mascote.minimizado .mascote-corpo { opacity: 0.85; }
+
+/* Movimento */
+
+/* Só movimento, sem opacidade: se a animação não rodar, o mascote continua visível. */
+@keyframes m-chegar {
+  from { transform: translateY(6rem); }
+}
+@keyframes m-respirar {
+  0%, 100% { transform: scale(1, 1) rotate(-1.2deg); }
+  50% { transform: scale(1.025, 0.975) rotate(1.2deg); }
+}
+@keyframes m-piscar {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+@keyframes m-acenar {
+  from { transform: rotate(-125deg); }
+  to { transform: rotate(-160deg); }
+}
+@keyframes m-rir {
+  from { transform: translateY(0) rotate(-2deg); }
+  to { transform: translateY(-3px) rotate(2deg); }
+}
+@keyframes m-pular {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  20% { transform: translateY(2px) scale(1.06, 0.92); }
+  55% { transform: translateY(-16px) scale(0.97, 1.04); }
+  85% { transform: translateY(1px) scale(1.03, 0.97); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascote,
+  .mascote * { animation: none !important; transition: none !important; }
+}
+
+/* Celular: menor e acima da barra fixa de WhatsApp. */
+
+@media (max-width: 759px) {
+  .mascote { --m-tamanho: 3.5rem; right: 0.5rem; bottom: 5rem; grid-auto-flow: column; align-items: end; gap: 0.4rem; }
+  /* O balão fica ao lado do mascote, numa faixa baixa, para cobrir o mínimo da página. */
+  .mascote-balao { max-width: calc(100vw - 5.5rem); padding: 0.55rem 0.75rem; font-size: 0.9375rem; border-radius: 0.9rem 0.9rem 0.25rem 0.9rem; transform-origin: 100% 100%; }
+}
