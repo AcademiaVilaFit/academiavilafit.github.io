@@ -632,3 +632,14 @@ address {
   .local { grid-template-columns: 1fr 1.1fr; gap: 4rem; }
   .mapa, .mapa iframe { min-height: 100%; }
 }
+
+/* Página de acessibilidade */
+
+.declaracao { max-width: 44rem; margin-inline: auto; padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 2rem) 5rem; }
+.declaracao h1 { max-width: none; margin: 1.5rem 0 1.25rem; }
+.declaracao h2 { margin: 2.75rem 0 0.75rem; font-size: clamp(1.5rem, 3.2vw, 2rem); }
+.declaracao p, .declaracao li { max-width: 62ch; }
+.declaracao ul { margin: 0; padding-left: 1.25rem; list-style: disc; }
+.declaracao li + li { margin-top: 0.6rem; }
+.declaracao-voltar { font-weight: 600; }
+.declaracao-data { margin-top: 3rem; opacity: 0.8; font-size: 0.9375rem; }
