@@ -609,7 +609,8 @@ address {
   .capa-foto::after {
     background: linear-gradient(to right, oklch(0.19 0.012 100 / 0.94) 0%, oklch(0.19 0.012 100 / 0.8) 36%, oklch(0.19 0.012 100 / 0.1) 76%);
   }
-  .capa-foto img { inset: 0 0 0 auto; width: 138%; max-width: none; object-position: 100% 42%; transform-origin: 80% 50%; }
+  /* No computador, a mesma foto do celular, enquadrada nos aparelhos. */
+  .capa-foto img { object-position: 50% 72%; transform-origin: 70% 50%; }
   .capa-foto::after {
     background: linear-gradient(to right, oklch(0.19 0.012 100 / 0.97) 0%, oklch(0.19 0.012 100 / 0.93) 40%, oklch(0.19 0.012 100 / 0.5) 58%, oklch(0.19 0.012 100 / 0.05) 82%);
   }
