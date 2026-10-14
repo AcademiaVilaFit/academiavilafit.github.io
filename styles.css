@@ -313,6 +313,11 @@ h1 { max-width: 13ch; }
 
 .estrutura { display: grid; gap: 3rem; }
 
+/* As fotos vêm dentro de <picture> (AVIF com JPEG de reserva); o <picture> não ocupa espaço próprio. */
+.rolo-trilho picture,
+.horarios > picture { display: contents; }
+picture > source { display: none; }
+
 /* Rolo de fotos: desliza com o dedo, com as setas ou com o teclado. */
 .rolo { min-width: 0; }
 .rolo-trilho {
