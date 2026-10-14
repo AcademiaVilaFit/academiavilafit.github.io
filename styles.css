@@ -269,7 +269,7 @@ h1 { max-width: 13ch; }
   border-radius: 50%;
   background: var(--cinza);
 }
-.estado.aberta .estado-ponto { background: var(--verde); animation: pulsar 2.4s ease-out infinite; }
+.estado.aberta .estado-ponto { background: var(--verde); animation: pulsar 2.4s ease-out 3; }
 .estado.fechada .estado-ponto { background: var(--vermelho); }
 
 .nota-link { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 2.75rem; }
